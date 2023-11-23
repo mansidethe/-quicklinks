@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import path from 'path';
+
 
 dotenv.config();
 
@@ -8,6 +10,8 @@ import Link from './models/Link.js';
 
 const app = express();
 app.use(express.json());
+
+const __dirname = path.resolve();
 
 const connectDB = async () =>{
     const conn = await mongoose.connect(process.env.MONGODB_URI);
@@ -36,7 +40,7 @@ app.post("/link", async (req, res)=>{
                 success:true,
                 data:{
                   
-                    shortLink: `${process.env.BASE_URL}/${savedLink.slug}`
+                    shortUrl: `${process.env.BASE_URL}/${savedLink.slug}`
 
                 },
                 message:"Link saved successfully"
@@ -50,29 +54,48 @@ app.post("/link", async (req, res)=>{
         }
 })
 
-app.get("/:slug", async (req, res)=>{
+app.get("/:slug", async (req, res) => {
+    const { slug } = req.params;
+  
+    const link = await Link.findOne({ slug: slug });
+  
+    await Link.updateOne(
+      { slug: slug },
+      {
+        $set: {
+          clicks: link.clicks + 1,
+        },
+      }
+    );
+  
+    if (!link) {
+      return res.json({
+        success: false,
+        message: "link not found",
+      });
+    }
+  
+    res.redirect(link.url);
+  });
 
-    const {slug} = req.params;
 
-    const link = await Link.findOne({slug:slug});
-    
-    await Link.updateOne({ slug: slug }, { $set: { clicks: link.clicks + 1 } });
-
-
-
-
-if(!link){
+app.get("/api/links", async (req, res)=>{
+    const links = await Link.find({});
+  
     return res.json({
-        success:false,
-        message:"Link not found"
+      success: true,
+      data: links,
+      message: "Links fetched successfully"
     })
-}
+  })
 
-    const redirectUrl = link.url;
-
-    res.redirect(redirectUrl);
-    
-})
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+    });
+  }
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>{

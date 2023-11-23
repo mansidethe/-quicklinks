@@ -1,38 +1,82 @@
-.App {
+.app-title{
   text-align: center;
+  margin-bottom: 50px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+.link-generation-card{
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 5px 1px black;
+}
+.input-user{
+  display: block;
+  width: 280px;
+  margin: 20px;
+  font-size: 18px;
+  padding: 5px 10px;
+ 
+ 
+}
+.btn-generate-link{
+  display: block;
+  background-color: black;
   color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 10px auto;
+  cursor: pointer;
 }
-
-.App-link {
-  color: #61dafb;
+.copy-image{
+  height: 20px;
+  position: relative;
+  top: 25px;
+  right: 20px;
+  cursor: pointer;
 }
+.input-short-url{
+  width: 260px;
+  margin: 20px;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.short-url-container{
+display: flex;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+justify-content: space-around;
+}
+.all-links-container{
+  height: 72vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: 1px;
+}
+.all-links-container::-webkit-scrollbar {
+  display: none;
+}
+.link-text{
+  font-size: 20px;
+  
+}
+.text-url{
+  color:rgb(5, 117, 161);
+  font-size: 17px;
+}
+.link-card{
+  background-color:white;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px lightblue;
+  color: black;
+  width: 600px;
+}
+.link-gene{
+  text-align: center;
 }
