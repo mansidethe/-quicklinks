@@ -10,31 +10,6 @@ function App() {
   const [shortUrl, setShortUrl] = useState('')
   const [links, setLinks] = useState([])
 
-  // const generateLink = async () => {
-  //   const response = await axios.post('/link', {
-  //     url,
-  //     slug
-  //   })
-
-  //   setShortUrl(response?.data?.data?.shortUrl)
-  // }
-
-  // const copyShortUrl = () => {
-
-  //   navigator.clipboard.writeText(shortUrl)
-  //   alert('copied to clipboard')
-  // }
-
-
-  // const loadLinks = async () => {
-  //   const response = await axios.get('/api/links');
-
-  //   setLinks(response?.data?.data)
-  // }
-
-  // useEffect(()=>{
-  //   loadLinks();
-  // }, [])
   const  generateLink = async () => {
     const response = await axios.post('/link', {
       url,
