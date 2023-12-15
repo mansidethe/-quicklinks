@@ -20,9 +20,7 @@
   margin: 20px;
   font-size: 18px;
   padding: 5px 10px;
- 
- 
-}
+ }
 .btn-generate-link{
   display: block;
   background-color: black;
@@ -79,4 +77,13 @@ justify-content: space-around;
 }
 .link-gene{
   text-align: center;
+}
+@media screen and (max-width:668px) {
+  .link-generation-card{
+ width: 300px;
+}
+.input-user{
+  width: 240px;
+  margin: 20px;
+ }
 }
